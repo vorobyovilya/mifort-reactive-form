@@ -1,0 +1,43 @@
+<form [formGroup]="myForm" novalidate class="example-container" (submit)="submit()">
+
+  <mat-form-field>
+    <input #name matInput name="name" placeholder="Name" formControlName="userName" required/>
+    <mat-error *ngIf="myForm.controls.userName.touched && name.value.length < 2 && name.value != ''">{{'Min 2 characters'}}</mat-error>
+    <mat-error *ngIf="myForm.controls.userName.touched &&  name.value.length > 30 && name.value != ''">{{'Max 30 characters'}}</mat-error>
+    <mat-error *ngIf="myForm.controls.userName.touched  && name.value == ''">{{"It's a required field"}}</mat-error>
+
+  </mat-form-field>
+  <br>
+  <mat-form-field>
+    <input #email matInput name="email" placeholder="Email" formControlName="userEmail" required/>
+    <mat-error *ngIf="myForm.controls.userEmail.touched && myForm.controls.userEmail.invalid && email.value != ''">{{'Please enter a valid email address'}}</mat-error>
+    <mat-error *ngIf="myForm.controls.userEmail.touched && email.value == ''">{{"It's a required field"}}</mat-error>
+  </mat-form-field>
+  <br>
+  <mat-form-field>
+    <input matInput name="emailConfirm" placeholder="Confirm Email" formControlName="userEmailConfirm" required/>
+  </mat-form-field>
+  <mat-error *ngIf="myForm.errors">{{'Entered emails are different!'}}</mat-error>
+  <br>
+  <mat-form-field>
+    <input #age matInput type="number" placeholder="Age" name="age" min="0" max="100" formControlName="userAge" required/>
+    <mat-error *ngIf="myForm.controls.userAge.touched && age.value < 18 && age.value != ''">{{"Minimum age is 18"}}</mat-error>
+    <mat-error *ngIf="myForm.controls.userAge.touched && age.value == ''">{{"It's a required field"}}</mat-error>
+    <mat-error *ngIf="myForm.controls.userAge.touched && age.value > 65">{{"Max age is 65"}}</mat-error>
+  </mat-form-field>
+  <br>
+  <mat-form-field>
+    <input formControlName="userSkill" type="text" placeholder="Pick skill" aria-label="Number" matInput
+           [matAutocomplete]="auto" required>
+    <mat-error *ngIf="myForm.controls.userSkill.touched && myForm.controls.userSkill.invalid">{{"It's a required field"}}</mat-error>
+    <mat-autocomplete #auto="matAutocomplete">
+      <mat-option *ngFor="let option of skills" [value]="option">
+        {{option}}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+  <br>
+  <button mat-raised-button type="submit"  [disabled]="myForm.invalid">Submit</button>
+</form>
+
+
