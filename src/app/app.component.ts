@@ -8,8 +8,8 @@ import {User} from "./User";
 })
 export class AppComponent {
   title = 'Reactive Form';
-  newUser: User = new User('',0, '', '');
-  jsonUser = 'Fill in the form';
+  newUser: User;
+  jsonUser;
   saveUser(user): void {
     this.newUser = this.mapFormResultToUser(user);
     //console.log(this.newUser);

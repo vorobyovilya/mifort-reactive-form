@@ -9,5 +9,5 @@
   <app-my-form (userRegistered)="saveUser($event)"></app-my-form>
 
   <hr>
-  <label *ngIf="jsonUser != 'Fill in the form'">New User:</label> {{jsonUser}}
+  <label *ngIf="jsonUser">New User:</label> {{ jsonUser}}
 </div>
